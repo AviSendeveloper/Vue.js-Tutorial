@@ -8,20 +8,20 @@ const app = Vue.createApp({
     },
 
     methods: {
-        changeColor(box) {
-            if (box == 'A') {
+        selectBox(boxName) {
+            if (boxName == 'A') {
                 if (this.boxASelected == false) {
                     this.boxASelected = true;
                 } else {
                     this.boxASelected = false;
                 }
-            } else if (box == 'B') {
+            } else if (boxName == 'B'){
                 if (this.boxBSelected == false) {
                     this.boxBSelected = true;
                 } else {
                     this.boxBSelected = false;
                 }
-            } else if (box == 'C') {
+            } else if (boxName == 'C') {
                 if (this.boxCSelected == false) {
                     this.boxCSelected = true;
                 } else {
@@ -32,4 +32,4 @@ const app = Vue.createApp({
     }
 });
 
-app.mount('#styling')
+app.mount('#styling');
