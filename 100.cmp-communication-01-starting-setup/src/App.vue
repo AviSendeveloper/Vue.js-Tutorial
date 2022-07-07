@@ -3,6 +3,7 @@
     <header>
       <h1>My Friends</h1>
     </header>
+    <new-friend @add-contact="addNewContact"></new-friend>
     <ul>
       <friend-contact
         v-for="friend in friends"
@@ -12,7 +13,8 @@
         :phone-number="friend.phone"
         :email-address="friend.email"
         :is-favourite="friend.isFavourite"
-        @toggle-favourite = "toggleFavouriteStatus"
+        @toggle-favourite="toggleFavouriteStatus"
+        @delete="deleteContact"
       >
       </friend-contact>
     </ul>
@@ -29,14 +31,14 @@ export default {
           name: "Manuel Lorenz",
           phone: "0123 45678 90",
           email: "manuel@localhost.com",
-          isFavourite: false
+          isFavourite: false,
         },
         {
           id: "julie",
           name: "Julie Jones",
           phone: "0987 654421 21",
           email: "julie@localhost.com",
-          isFavourite: true
+          isFavourite: true,
         },
       ],
     };
@@ -44,10 +46,28 @@ export default {
 
   methods: {
     toggleFavouriteStatus(friendId) {
-      const identifiedFriend = this.friends.find(friend => friend.id === friendId);
+      const identifiedFriend = this.friends.find(
+        (friend) => friend.id === friendId
+      );
       identifiedFriend.isFavourite = !identifiedFriend.isFavourite;
+    },
+
+    addNewContact(name, phone, email) {
+      const newContactDetails = {
+        id: new Date().toISOString(),
+        name: name,
+        phone: phone,
+        email: email,
+        isFavourite: false,
+      };
+
+      this.friends.push(newContactDetails);
+    },
+
+    deleteContact(friendId) {
+      this.friends = this.friends.filter(friend => friend.id !== friendId);
     }
-  }
+  },
 };
 </script>
 
@@ -82,7 +102,8 @@ header {
   list-style: none;
 }
 
-#app li {
+#app li,
+#app form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 1rem auto;
   border-radius: 10px;
@@ -114,5 +135,18 @@ header {
   background-color: #ec3169;
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+}
+#app input {
+  font: inherit;
+  padding: 0.15rem;
+}
+#app label {
+  font-weight: bold;
+  margin-right: 1rem;
+  width: 7rem;
+  display: inline-block;
+}
+#app form div {
+  margin: 1rem 0;
 }
 </style>

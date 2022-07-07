@@ -5,6 +5,7 @@
       {{ detailsAreVisible ? "Hide" : "Show" }} Details
     </button>
     <button @click="toggleFavourite">Change Favourite Status</button>
+    <button @click="$emit('delete', id)">Delete</button>
     <ul v-if="detailsAreVisible">
       <li>
         <strong>Phone:</strong>
