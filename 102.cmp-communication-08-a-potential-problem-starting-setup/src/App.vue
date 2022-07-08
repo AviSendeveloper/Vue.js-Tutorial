@@ -5,6 +5,18 @@
       :text="activeTopic && activeTopic.fullText"
     ></active-element>
     <knowledge-base :topics="topics" @select-topic="activateTopic"></knowledge-base>
+
+    <!-- 
+      It will also work
+    -->
+    <!-- <knowledge-element
+      v-for="topic in topics"
+      :key="topic.id"
+      :id="topic.id"
+      :topic-name="topic.title"
+      :description="topic.description"
+      @select-topic="activateTopic"
+    ></knowledge-element> -->
   </div>
 </template>
 
